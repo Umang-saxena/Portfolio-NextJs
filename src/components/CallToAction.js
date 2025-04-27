@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const CallToAction = () => {
     return (
-        <div className="w-full min-h-screen bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF] flex items-center justify-center px-6">
+        <div className="w-full min-h-screen pt-20 bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF] flex items-center justify-center px-6">
             <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-10 max-w-8xl py-10">
                 <div className="flex flex-col text-center md:text-left items-center md:items-start py-8 md:py-12 md:w-1/2 space-y-8">
                     <h2 className="md:text-7xl text-4xl font-bold text-gray-800 leading-tight">
