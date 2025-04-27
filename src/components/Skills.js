@@ -16,8 +16,12 @@ const Skills = () => {
     ];
 
     return (
-        <section className="py-16 bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF]">
-            <div className="container mx-auto px-4">
+        <section className="relative py-16 bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF] overflow-hidden">
+            {/* Top left light effect */}
+            <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-15"></div>
+            <div className="absolute -top-12 -left-12 w-80 h-80 bg-purple-400 rounded-full mix-blend-multiply filter blur-[80px] opacity-10"></div>
+            
+            <div className="container mx-auto px-4 relative">
                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
                     Technologies I Work With
                 </h2>

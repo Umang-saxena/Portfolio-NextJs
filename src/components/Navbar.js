@@ -7,7 +7,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'About Me', path: '/' },
-        { name: 'Projects', path: '/' },
+        { name: 'Projects', path: '/projects' },
     ];
 
     const [isScrolled, setIsScrolled] = React.useState(false);
@@ -26,10 +26,10 @@ const Navbar = () => {
             <div className="container mx-auto px-6 py-4 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                <div className="relative">
-                    <FaUserCircle className={`h-10 w-10 ${isScrolled ? "text-white" : "text-gray-800"}`} />
-                </div>
-                <p className={`${isScrolled ? "text-white" : "text-gray-800"}`}> Umang Saxena</p>
+                    <div className="relative">
+                        <FaUserCircle className={`h-10 w-10 ${isScrolled ? "text-white" : "text-gray-800"}`} />
+                    </div>
+                    <p className={`${isScrolled ? "text-white" : "text-gray-800"}`}> Umang Saxena</p>
                 </Link>
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-4 lg:gap-8">
