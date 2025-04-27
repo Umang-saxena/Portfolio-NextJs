@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import CallToAction from '../components/CallToAction';
 import Hero from '../components/Hero';
-
+import Footer from '../components/Footer';
 export default function Home() {
   return (
     <main className="relative overflow-hidden">
@@ -13,6 +13,7 @@ export default function Home() {
       <div className="flex flex-col -space-y-16">
         <Hero />
         <CallToAction />
+        <Footer />
       </div>
     </main>
   );

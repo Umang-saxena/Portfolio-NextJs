@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 const Hero = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <div className="relative w-full h-screen bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF] flex items-center pt-16">
