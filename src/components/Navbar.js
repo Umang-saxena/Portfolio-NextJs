@@ -39,9 +39,9 @@ const Navbar = () => {
                             <div className={`${isScrolled ? "bg-white" : "bg-gray-800"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
                         </Link>
                     ))}
-                    <button className={`border ${isScrolled ? "border-white text-white hover:bg-white hover:text-blue-600" : "border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white"} px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all`}>
+                    <Link href="/resume" className={`border ${isScrolled ? "border-white text-white hover:bg-white hover:text-blue-600" : "border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white"} px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all`}>
                         Download CV
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Desktop Right */}
@@ -82,9 +82,9 @@ const Navbar = () => {
                         </Link>
                     ))}
 
-                    <button className="border border-white px-4 py-1 text-sm font-light rounded-full cursor-pointer text-white hover:bg-white hover:text-blue-600 transition-all">
+                    <Link href="/resume" className="border border-white px-4 py-1 text-sm font-light rounded-full cursor-pointer text-white hover:bg-white hover:text-blue-600 transition-all">
                         Download CV
-                    </button>
+                    </Link>
 
                     <button className="bg-white text-blue-600 px-8 py-2.5 rounded-full transition-all duration-500 flex items-center gap-2 hover:bg-blue-700 hover:text-white">
                         Login <FaArrowAltCircleRight className="text-xl" />
