@@ -6,7 +6,7 @@ import { FaArrowAltCircleRight, FaUserCircle } from "react-icons/fa";
 const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
-        { name: 'About Me', path: '/' },
+        { name: 'About Me', path: '/about' },
         { name: 'Projects', path: '/projects' },
     ];
 
