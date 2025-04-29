@@ -2,6 +2,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import ProjectCard from '@/components/ProjectCard';
+import { motion } from 'framer-motion';
 
 const projects = [
     {
@@ -37,7 +38,15 @@ const Projects = () => {
                 <Navbar />
             </div>
             <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+                <motion.div 
+                    className="max-w-7xl mx-auto"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                        duration: 0.8,
+                        ease: "easeOut"
+                    }}
+                >
                     {/* Header */}
                     <div className="text-center mb-16">
                         <h2 className="text-5xl font-bold text-blue-500 mb-4">My Projects</h2>
@@ -50,10 +59,21 @@ const Projects = () => {
                     {/* Projects Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {projects.map((project, index) => (
-                            <ProjectCard key={index} {...project} />
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ 
+                                    duration: 0.5,
+                                    delay: index * 0.2,
+                                    ease: "easeOut"
+                                }}
+                            >
+                                <ProjectCard {...project} />
+                            </motion.div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
             </section>
         </main>
     );
