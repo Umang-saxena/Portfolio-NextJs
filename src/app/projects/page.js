@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../../components/Navbar';
 import ProjectCard from '@/components/ProjectCard';
 import { motion } from 'framer-motion';
+import Footer from '@/components/Footer';
 
 const projects = [
     {
@@ -75,6 +76,7 @@ const Projects = () => {
                     </div>
                 </motion.div>
             </section>
+            <Footer />
         </main>
     );
 };
