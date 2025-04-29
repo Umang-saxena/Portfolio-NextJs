@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 const Resume = () => {
     const handleDownload = () => {
         // This will be updated with your Google Drive link
-        window.open('YOUR_GOOGLE_DRIVE_LINK', '_blank');
+        window.open('https://drive.google.com/file/d/1Z0KAls0FPaBzyrx1bqB-hnb3h5ChAp4E/view?usp=drive_link', '_blank');
     };
 
     return (
@@ -38,7 +38,7 @@ const Resume = () => {
                     <div className="bg-white/50 backdrop-blur-sm rounded-xl p-8 mb-8 shadow-lg">
                         <div className="aspect-[1/1.4] w-full max-w-2xl mx-auto bg-white rounded-lg shadow-inner overflow-hidden">
                             <iframe
-                                src="YOUR_GOOGLE_DRIVE_EMBED_LINK"
+                                src="https://drive.google.com/file/d/1Z0KAls0FPaBzyrx1bqB-hnb3h5ChAp4E/view?usp=drive_link"
                                 className="w-full h-full"
                                 title="Resume Preview"
                             />
