@@ -7,28 +7,36 @@ import Footer from '@/components/Footer';
 
 const projects = [
     {
-        title: 'E-Commerce Platform',
-        description: 'A full-stack e-commerce platform with features like product catalog, shopping cart, user authentication, and payment integration.',
-        tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-        image: '/images/projects/ecommerce.jpg',
-        link: 'https://ecommerce-demo.com',
-        github: 'https://github.com/yourusername/ecommerce'
+        title: 'Job Sphere (Presently Working) ',
+        description: 'Built a scalable job-hunting platform using MERN stack with robust frontend, backend, and database-level validations. ',
+        tech: ['ReactJs', 'Node.js', 'MongoDB', 'Express.js','Redux Toolkit'],
+        image: '/images/projects/job-sphere.jpg',
+        link: '/',
+        github: '/'
     },
     {
-        title: 'Task Management App',
-        description: 'A collaborative task management application with real-time updates, team workspaces, and progress tracking.',
-        tech: ['Next.js', 'Firebase', 'Tailwind CSS'],
-        image: '/images/projects/taskmanager.jpg',
-        link: 'https://taskmanager-demo.com',
-        github: 'https://github.com/yourusername/taskmanager'
+        title: 'TrackIt',
+        description: 'Developed an expense tracking app with real-time authentication and budget management features.',
+        tech: ['Next.js', 'Firebase', 'Tailwind CSS','Mongodb','Shadcn','Recharts'],    
+        image: '/images/projects/trackit.jpg',
+        link: 'https://expense-tracker-sigma-jet.vercel.app/',
+        github: 'https://github.com/Umang-saxena/expense-tracker'
     },
     {
-        title: 'Weather Dashboard',
-        description: 'A weather dashboard that displays current weather conditions and forecasts using OpenWeather API.',
-        tech: ['React', 'OpenWeather API', 'Chart.js'],
-        image: '/images/projects/weather.jpg',
-        link: 'https://weather-demo.com',
-        github: 'https://github.com/yourusername/weather'
+        title: 'Brain Tumour Detection',
+        description: ' Designed and trained a deep learning model using a 4-layer ResNet architecture to detect brain tumors from MRI scans. ',
+        tech: ['Python', 'ResNet', 'Streamlit', 'Machine Learning'],
+        image: '/images/projects/brain-tumour.jpg',
+        link: 'https://github.com/Umang-saxena/Brain-tumour-detection',
+        github: 'https://github.com/Umang-saxena/Brain-tumour-detection'
+    },
+    {
+        title: 'React Portfolio Template',
+        description: ' Designed a portfolio template as a side project with the aim of good animations and clean UI.',
+        tech: ['React', 'ResNet', 'Streamlit', 'Machine Learning'],
+        image: '/images/projects/portfolio.jpg',
+        link: 'https://umang-portfolio-blush.vercel.app/',
+        github: 'https://github.com/Umang-saxena/Portfolio'
     }
 ];
 
