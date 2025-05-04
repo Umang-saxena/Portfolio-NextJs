@@ -37,6 +37,14 @@ const projects = [
         image: '/images/projects/portfolio.jpg',
         link: 'https://umang-portfolio-blush.vercel.app/',
         github: 'https://github.com/Umang-saxena/Portfolio'
+    },
+    {
+        title: 'Eventify  | Events Management System (May not work due to AWS cluster credential issues)',
+        description: ' Designed a portfolio template as a side project with the aim of good animations and clean UI.',
+        tech: ['Python', 'DBMS', 'MySQL', 'Streamlit',"AWS RDS"],
+        image: '/images/projects/eventify.png',
+        link: 'https://umang-portfolio-blush.vercel.app/',
+        github: 'https://github.com/Umang-saxena/Event_management1'
     }
 ];
 
