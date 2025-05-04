@@ -8,7 +8,6 @@ const Skills = () => {
         { icon: FaReact, name: 'React', color: '#61DAFB' },
         { icon: TbBrandNextjs, name: 'Next.js', color: '#000000' },
         { icon: SiJavascript, name: 'JavaScript', color: '#F7DF1E' },
-        { icon: SiTypescript, name: 'TypeScript', color: '#3178C6' },
         { icon: FaNodeJs, name: 'Node.js', color: '#339933' },
         { icon: FaPython, name: 'Python', color: '#3776AB' },
         { icon: SiMongodb, name: 'MongoDB', color: '#47A248' },
