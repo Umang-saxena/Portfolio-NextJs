@@ -50,12 +50,20 @@ const Navbar = () => {
                         <circle cx="11" cy="11" r="8" />
                         <line x1="21" y1="21" x2="16.65" y2="16.65" />
                     </svg>
-                    <Link 
+                    <a 
+                        href="https://www.linkedin.com/in/umang-saxena-9b5632331/"
+                        target='_blank'
+                        rel="noopener noreferrer"
+                        className={`${isScrolled ? "bg-white text-blue-600 hover:bg-blue-700 hover:text-white" : "bg-gray-800 text-white hover:bg-gray-700"} px-8 py-2.5 rounded-full transition-all duration-500 flex items-center gap-2`}
+                    >
+                        Lets Connect <FaArrowAltCircleRight className="text-xl" />
+                    </a>
+                    {/* <Link 
                         href="/contact"
                         className={`${isScrolled ? "bg-white text-blue-600 hover:bg-blue-700 hover:text-white" : "bg-gray-800 text-white hover:bg-gray-700"} px-8 py-2.5 rounded-full transition-all duration-500 flex items-center gap-2`}
                     >
                         Lets Connect <FaArrowAltCircleRight className="text-xl" />
-                    </Link>
+                    </Link> */}
                 </div>
 
                 {/* Mobile Menu Button */}
