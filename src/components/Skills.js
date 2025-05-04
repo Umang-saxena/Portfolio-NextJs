@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaReact, FaNodeJs, FaPython, FaGitAlt } from 'react-icons/fa';
-import { SiJavascript, SiTypescript, SiTailwindcss, SiMongodb } from 'react-icons/si';
+import { SiJavascript, SiTypescript, SiTailwindcss, SiMongodb, SiDocker, SiFirebase, SiPostman, SiJira, SiCplusplus, SiC } from 'react-icons/si';
 import { TbBrandNextjs } from "react-icons/tb";
 
 const Skills = () => {
@@ -12,8 +12,16 @@ const Skills = () => {
         { icon: FaNodeJs, name: 'Node.js', color: '#339933' },
         { icon: FaPython, name: 'Python', color: '#3776AB' },
         { icon: SiMongodb, name: 'MongoDB', color: '#47A248' },
-        { icon: SiTailwindcss, name: 'Tailwind', color: '#06B6D4' }
+        { icon: SiTailwindcss, name: 'Tailwind', color: '#06B6D4' },
+        { icon: SiDocker, name: 'Docker', color: '#2496ED' },
+        { icon: SiFirebase, name: 'Firebase', color: '#FFCA28' },
+        { icon: SiPostman, name: 'Postman', color: '#FF6C37' },
+        { icon: SiJira, name: 'Jira', color: '#0052CC' },
+        { icon: SiCplusplus, name: 'C++', color: '#00599C' },
+        { icon: SiC, name: 'C', color: '#A8B9CC' },
+        { icon: FaGitAlt, name: 'Git', color: '#F05032' }
     ];
+
 
     return (
         <section className="relative py-16 bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF] overflow-hidden">
@@ -46,4 +54,4 @@ const Skills = () => {
     );
 };
 
-export default Skills; 
+export default Skills;
