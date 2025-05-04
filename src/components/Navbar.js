@@ -26,10 +26,8 @@ const Navbar = () => {
             <div className="container mx-auto px-6 py-4 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                    <div className="relative">
-                        <FaUserCircle className={`h-10 w-10 ${isScrolled ? "text-white" : "text-gray-800"}`} />
-                    </div>
-                    <p className={`${isScrolled ? "text-white" : "text-gray-800"}`}> Umang Saxena</p>
+                    
+                    <p className={`${isScrolled ? "text-white" : "text-gray-800 text-2xl font-bold"}`}> Umang Saxena</p>
                 </Link>
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-4 lg:gap-8">
@@ -50,20 +48,14 @@ const Navbar = () => {
                         <circle cx="11" cy="11" r="8" />
                         <line x1="21" y1="21" x2="16.65" y2="16.65" />
                     </svg>
-                    {/* <a 
+                    <a 
                         href="https://www.linkedin.com/in/umang-saxena-9b5632331/"
                         target='_blank'
                         rel="noopener noreferrer"
                         className={`${isScrolled ? "bg-white text-blue-600 hover:bg-blue-700 hover:text-white" : "bg-gray-800 text-white hover:bg-gray-700"} px-8 py-2.5 rounded-full transition-all duration-500 flex items-center gap-2`}
                     >
                         Lets Connect <FaArrowAltCircleRight className="text-xl" />
-                    </a> */}
-                    <Link 
-                        href="/contact"
-                        className={`${isScrolled ? "bg-white text-blue-600 hover:bg-blue-700 hover:text-white" : "bg-gray-800 text-white hover:bg-gray-700"} px-8 py-2.5 rounded-full transition-all duration-500 flex items-center gap-2`}
-                    >
-                        Lets Connect <FaArrowAltCircleRight className="text-xl" />
-                    </Link>
+                    </a>
                 </div>
 
                 {/* Mobile Menu Button */}

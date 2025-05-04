@@ -1,5 +1,5 @@
-"use client"
-import React, { useState } from 'react'
+import React from 'react'
+import Link from 'next/link'
 
 const Hero = () => {
     // const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,12 +21,16 @@ const Hero = () => {
                             Turning complex problems into elegant solutions.
                         </p>
                         <div className="mt-8 md:mt-10 flex flex-wrap gap-4 justify-center md:justify-start">
-                            <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-500 text-white font-medium rounded-full hover:bg-blue-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-blue-500/50">
-                                View Projects
-                            </button>
+                            <Link href="/projects" passHref>
+                                <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-blue-500 text-white font-medium rounded-full hover:bg-blue-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-blue-500/50">
+                                    View Projects
+                                </button>
+                            </Link>
+                            <a href="https://www.linkedin.com/in/umang-saxena-9b5632331/" target='_blank' rel="noopener noreferrer">
                             <button className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-transparent border-2 border-blue-500 text-blue-500 font-medium rounded-full hover:bg-blue-50 transform hover:scale-105 transition-all duration-200">
                                 Contact Me
                             </button>
+                            </a>
                         </div>
                         <div className="mt-8 md:mt-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 justify-center md:justify-start">
                             <div className="flex items-center gap-2">
@@ -45,8 +49,8 @@ const Hero = () => {
                         <div className="relative w-full max-w-[280px] sm:max-w-[400px] md:max-w-lg mx-auto aspect-square">
                             <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/30 to-purple-500/30 rounded-full blur-3xl"></div>
                             <img 
-                                className="relative z-10 w-full h-full object-contain rounded-3xl transform hover:scale-105 transition-transform duration-500 hover:rotate-2"
-                                src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/thinkingImage.svg" 
+                                className="relative z-10 w-full h-full object-contain rounded-3xl transform hover:scale-105 transition-transform duration-500 hover:rotate-2 "
+                                src="/images/profile.jpg"
                                 alt="Umang Saxena"
                             />
                         </div>
