@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaReact, FaNodeJs, FaPython, FaGitAlt } from 'react-icons/fa';
-import { SiJavascript, SiTypescript, SiTailwindcss, SiMongodb, SiDocker, SiFirebase, SiPostman, SiJira, SiCplusplus, SiC } from 'react-icons/si';
+import { SiJavascript, SiTypescript, SiTailwindcss, SiMongodb, SiDocker, SiFirebase, SiPostman, SiJira, SiCplusplus, SiC,SiMysql,SiGithubactions } from 'react-icons/si';
 import { TbBrandNextjs } from "react-icons/tb";
 
 const Skills = () => {
@@ -19,7 +19,9 @@ const Skills = () => {
         { icon: SiJira, name: 'Jira', color: '#0052CC' },
         { icon: SiCplusplus, name: 'C++', color: '#00599C' },
         { icon: SiC, name: 'C', color: '#A8B9CC' },
-        { icon: FaGitAlt, name: 'Git', color: '#F05032' }
+        { icon: FaGitAlt, name: 'Git', color: '#F05032' },
+        {icon: SiMysql, name: 'MySQL', color: '#2496ED' },
+        { icon: SiGithubactions, name: 'CI/CD (GitHub Actions)', color: '#2496ED' }
     ];
 
 
