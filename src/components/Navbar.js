@@ -59,16 +59,18 @@ const Navbar = () => {
                             />
                         </Link>
                     ))}
-                    <Link
-                        href="/resume"
-                        className={`border ${
+                    <a
+                        href="https://drive.google.com/file/d/1Z0KAls0FPaBzyrx1bqB-hnb3h5ChAp4E/view?usp=drive_link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`border flex items-center gap-2 ${
                             isScrolled
                                 ? "border-white text-white hover:bg-white hover:text-blue-600"
                                 : "border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white"
                         } px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all`}
                     >
-                        Download CV
-                    </Link>
+                        Resume <FaArrowAltCircleRight className="text-xl" />
+                    </a>
                 </div>
 
                 {/* Desktop Right */}
@@ -148,14 +150,14 @@ const Navbar = () => {
                 ))}
 
                 <Link
-                    href="/resume"
-                    className={`border ${
+                    href="https://drive.google.com/file/d/1Z0KAls0FPaBzyrx1bqB-hnb3h5ChAp4E/view?usp=drive_link"
+                    className={`border flex items-center gap-2 ${
                         isScrolled
                             ? "border-white text-white hover:bg-white hover:text-blue-600"
                             : "border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white"
                     } px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all`}
                 >
-                    Download CV
+                    Resume <FaArrowAltCircleRight className="text-xl" />
                 </Link>
 
                 <a
