@@ -1,7 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
 import Navbar from '../components/Navbar';
-import CallToAction from '../components/CallToAction';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import Skills from '../components/Skills';
@@ -15,7 +13,6 @@ export default function Home() {
       <div className="flex flex-col">
         <Hero />
         <Skills />
-        <CallToAction />
         <Footer />
       </div>
     </main>
