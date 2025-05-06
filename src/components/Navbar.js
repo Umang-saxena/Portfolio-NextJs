@@ -8,6 +8,7 @@ const Navbar = () => {
         { name: "Home", path: "/" },
         { name: "About Me", path: "/about" },
         { name: "Projects", path: "/projects" },
+        { name: "Github", path: "https://github.com/Umang-saxena" },
     ];
 
     const [isScrolled, setIsScrolled] = React.useState(false);
