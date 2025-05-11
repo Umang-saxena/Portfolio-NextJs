@@ -95,7 +95,13 @@ const About = () => {
                 <h3 className="text-xl font-semibold text-gray-800">
                   Full Stack Developer Intern
                 </h3>
-                <p className="text-gray-600"> Taiyari24 • May 2025 - Present</p>
+                <p className="text-gray-600"> 
+                  <a
+                    href="https://www.taiyari24.com/"
+                    className="hover:text-blue-300 text-blue-600"
+                    target="_blank"
+                  > Taiyari24  {" "}
+                  </a>• May 2025 - Present</p>
                 <p className="text-gray-600 mt-2">
                   Developing web application features using NextJs.
                   Collaborating with the DevOps team to deploy applications on
