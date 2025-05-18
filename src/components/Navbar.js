@@ -61,7 +61,7 @@ const Navbar = () => {
                         </Link>
                     ))}
                     <a
-                        href="https://drive.google.com/file/d/1Z0KAls0FPaBzyrx1bqB-hnb3h5ChAp4E/view?usp=drive_link"
+                        href="https://drive.google.com/file/d/1AeRpV56DE8wVjiEy2_TdMPn76Dt3r1DK/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`border flex items-center gap-2 ${
@@ -151,7 +151,7 @@ const Navbar = () => {
                 ))}
 
                 <Link
-                    href="https://drive.google.com/file/d/1Z0KAls0FPaBzyrx1bqB-hnb3h5ChAp4E/view?usp=drive_link"
+                    href="https://drive.google.com/file/d/1AeRpV56DE8wVjiEy2_TdMPn76Dt3r1DK/view?usp=sharing"
                     className={`border flex items-center gap-2 ${
                         isScrolled
                             ? "border-white text-white hover:bg-white hover:text-blue-600"
