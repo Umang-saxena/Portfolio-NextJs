@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import api from '@/lib/axios';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -47,23 +48,17 @@ const PortfolioForm = () => {
                     validationSchema={validationSchema}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
                         try {
-                            // Replace with your API endpoint
-                            const response = await fetch('/api/portfolio', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify(values),
-                            });
+                            const response = await api.post('/api/portfolio', values);
 
-                            if (response.ok) {
+                            if (response.status === 200 || response.status === 201) {
                                 setSubmitStatus({ type: 'success', message: 'Project added successfully!' });
                                 resetForm();
-                            } else {
-                                setSubmitStatus({ type: 'error', message: 'Failed to add project.' });
                             }
                         } catch (error) {
-                            setSubmitStatus({ type: 'error', message: 'An error occurred.' });
+                            setSubmitStatus({ 
+                                type: 'error', 
+                                message: error.response?.data?.error || 'Failed to add project.' 
+                            });
                         } finally {
                             setSubmitting(false);
                         }

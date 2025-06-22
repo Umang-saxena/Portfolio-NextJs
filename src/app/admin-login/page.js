@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import api from '@/lib/axios';
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('');
@@ -10,16 +11,13 @@ export default function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const res = await fetch('/api/admin-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      router.push('/admin');
-    } else {
-      setError(data.error || 'Login failed');
+    try {
+      const response = await api.post('/api/admin-login', { password });
+      if (response.data.success) {
+        router.push('/admin');
+      }
+    } catch (error) {
+      setError(error.response?.data?.error || 'Login failed');
     }
   };
 
