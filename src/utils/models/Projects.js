@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const ProjectSchema = new mongoose.Schema({
     title: String,
     description: String,
-    image: String,
+    // image: String,
     githublink: String,
     demolink: String,
     technologies: [String],
