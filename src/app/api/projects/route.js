@@ -1,8 +1,17 @@
-import { NextResponse } from 'next/server';
-import dbConnect from '@/utils/mongoose';
+// import { mongooseConnect } from '@/utils/mongoose';
+import dbConnect from '@/utils/mongoose'
 import { Project } from '@/utils/models/Projects';
 
-// Validation function for project data
+/* ---------- helpers ---------- */
+const isValidUrl = (value) => {
+    try {
+        new URL(value);
+        return true;
+    } catch {
+        return false;
+    }
+};
+
 const validateProjectData = (data) => {
     const errors = [];
 
@@ -12,10 +21,6 @@ const validateProjectData = (data) => {
 
     if (!data.description || data.description.trim().length < 10) {
         errors.push('Description must be at least 10 characters long');
-    }
-
-    if (!data.image || !isValidUrl(data.image)) {
-        errors.push('Valid image URL is required');
     }
 
     if (data.githublink && !isValidUrl(data.githublink)) {
@@ -29,168 +34,131 @@ const validateProjectData = (data) => {
     return errors;
 };
 
-// URL validation helper
-const isValidUrl = (string) => {
-    try {
-        new URL(string);
-        return true;
-    } catch (_) {
-        return false;
-    }
-};
-
+/* ---------- POST /api/projects ---------- */
 export async function POST(request) {
     try {
         await dbConnect();
 
         const body = await request.json();
-        const { title, description, image, githublink, demolink, technologies } = body;
+        const { title, description, githublink, demolink, technologies } = body;
 
-        // Validate the data
+        /* validation -------------------------------------------------------- */
         const validationErrors = validateProjectData(body);
         if (validationErrors.length > 0) {
-            return NextResponse.json(
-                { 
-                    error: 'Validation failed', 
-                    details: validationErrors 
-                },
+            return new Response(
+                JSON.stringify({ success: false, error: 'Validation failed', details: validationErrors }),
                 { status: 400 }
             );
         }
 
-        // Check if project with same title already exists
-        const existingProject = await Project.findOne({ 
-            title: { $regex: new RegExp(`^${title}$`, 'i') } 
-        });
-
-        if (existingProject) {
-            return NextResponse.json(
-                { error: 'A project with this title already exists' },
+        /* duplicate-title check -------------------------------------------- */
+        const duplicate = await Project.findOne({ title: { $regex: new RegExp(`^${title}$`, 'i') } });
+        if (duplicate) {
+            return new Response(
+                JSON.stringify({ success: false, error: 'A project with this title already exists' }),
                 { status: 409 }
             );
         }
 
-        // Process technologies array
-        const processedTechnologies = Array.isArray(technologies) 
-            ? technologies.filter(tech => tech && tech.trim().length > 0)
+        /* create ----------------------------------------------------------- */
+        const processedTech = Array.isArray(technologies)
+            ? technologies.filter((t) => t && t.trim().length > 0)
             : [];
 
-        // Create new project
-        const project = new Project({
+        const project = await Project.create({
             title: title.trim(),
             description: description.trim(),
-            image: image.trim(),
-            githublink: githublink ? githublink.trim() : '',
-            demolink: demolink ? demolink.trim() : '',
-            technologies: processedTechnologies
+            githublink: githublink?.trim() || '',
+            demolink: demolink?.trim() || '',
+            technologies: processedTech,
         });
 
-        await project.save();
-
-        return NextResponse.json(
-            { 
-                success: true, 
-                message: 'Project created successfully', 
+        return new Response(
+            JSON.stringify({
+                success: true,
+                message: 'Project created successfully',
                 project: {
                     id: project._id,
                     title: project.title,
                     description: project.description,
-                    image: project.image,
                     githublink: project.githublink,
                     demolink: project.demolink,
                     technologies: project.technologies,
-                    createdAt: project.createdAt
-                }
-            },
+                    createdAt: project.createdAt,
+                },
+            }),
             { status: 201 }
         );
+    } catch (err) {
+        console.error('Error creating project:', err);
 
-    } catch (error) {
-        console.error('Error creating project:', error);
-        
-        // Handle specific MongoDB errors
-        if (error.name === 'ValidationError') {
-            const validationErrors = Object.values(error.errors).map(err => err.message);
-            return NextResponse.json(
-                { error: 'Validation failed', details: validationErrors },
+        /* Mongo validation duplicate-key, etc. */
+        if (err?.name === 'ValidationError') {
+            const details = Object.values(err.errors).map((e) => e.message);
+            return new Response(
+                JSON.stringify({ success: false, error: 'Validation failed', details }),
                 { status: 400 }
             );
         }
 
-        if (error.code === 11000) {
-            return NextResponse.json(
-                { error: 'A project with this title already exists' },
+        if (err?.code === 11000) {
+            return new Response(
+                JSON.stringify({ success: false, error: 'A project with this title already exists' }),
                 { status: 409 }
             );
         }
 
-        return NextResponse.json(
-            { error: 'Failed to create project. Please try again.' },
+        return new Response(
+            JSON.stringify({ success: false, error: 'Failed to create project. Please try again.' }),
             { status: 500 }
         );
     }
 }
 
+/* ---------- GET /api/projects ---------- */
 export async function GET(request) {
     try {
         await dbConnect();
 
+        /* optional pagination & sorting via query params ------------------- */
         const { searchParams } = new URL(request.url);
         const limit = parseInt(searchParams.get('limit')) || 50;
         const page = parseInt(searchParams.get('page')) || 1;
         const sortBy = searchParams.get('sortBy') || 'createdAt';
-        const sortOrder = searchParams.get('sortOrder') || 'desc';
+        const sortOrder = searchParams.get('sortOrder') === 'asc' ? 1 : -1;
 
-        // Validate sort parameters
         const allowedSortFields = ['title', 'createdAt', 'updatedAt'];
-        const allowedSortOrders = ['asc', 'desc'];
-        
         if (!allowedSortFields.includes(sortBy)) {
-            return NextResponse.json(
-                { error: 'Invalid sort field' },
-                { status: 400 }
-            );
+            return new Response(JSON.stringify({ success: false, error: 'Invalid sort field' }), {
+                status: 400,
+            });
         }
-
-        if (!allowedSortOrders.includes(sortOrder)) {
-            return NextResponse.json(
-                { error: 'Invalid sort order' },
-                { status: 400 }
-            );
-        }
-
-        const sortOptions = {};
-        sortOptions[sortBy] = sortOrder === 'desc' ? -1 : 1;
 
         const skip = (page - 1) * limit;
-
         const [projects, total] = await Promise.all([
-            Project.find({})
-                .sort(sortOptions)
-                .skip(skip)
-                .limit(limit)
-                .lean(),
-            Project.countDocuments({})
+            Project.find().sort({ [sortBy]: sortOrder }).skip(skip).limit(limit).lean(),
+            Project.countDocuments(),
         ]);
 
-        const totalPages = Math.ceil(total / limit);
-
-        return NextResponse.json({
-            projects,
-            pagination: {
-                currentPage: page,
-                totalPages,
-                totalProjects: total,
-                hasNextPage: page < totalPages,
-                hasPrevPage: page > 1
-            }
-        });
-
-    } catch (error) {
-        console.error('Error fetching projects:', error);
-        return NextResponse.json(
-            { error: 'Failed to fetch projects' },
+        return new Response(
+            JSON.stringify({
+                success: true,
+                projects,
+                pagination: {
+                    currentPage: page,
+                    totalPages: Math.ceil(total / limit),
+                    totalProjects: total,
+                    hasNextPage: page * limit < total,
+                    hasPrevPage: page > 1,
+                },
+            }),
+            { status: 200 }
+        );
+    } catch (err) {
+        console.error('Error fetching projects:', err);
+        return new Response(
+            JSON.stringify({ success: false, error: 'Failed to fetch projects' }),
             { status: 500 }
         );
     }
-} 
+}
