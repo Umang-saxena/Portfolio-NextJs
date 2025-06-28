@@ -6,31 +6,13 @@ export async function GET(request) {
     try {
         await dbConnect();
 
-        const { searchParams } = new URL(request.url);
-        const id = searchParams.get('id');
-
-        if (id) {
-            // Get specific record by ID
-            const about = await About.findById(id).lean();
-            if (!about) {
-                return new Response(
-                    JSON.stringify({ success: false, error: 'About record not found' }),
-                    { status: 404 }
-                );
-            }
-            return new Response(
-                JSON.stringify({ success: true, about }),
-                { status: 200 }
-            );
-        } else {
             // Get all records
             const aboutData = await About.find().sort({ createdAt: -1 }).lean();
             return new Response(
                 JSON.stringify({ success: true, count: aboutData.length, about: aboutData }),
                 { status: 200 }
-            );
-        }
-    } catch (err) {
+            )}
+        catch (err) {
         console.error('Error fetching about data:', err);
         return new Response(
             JSON.stringify({ success: false, error: 'Failed to fetch about data' }),
