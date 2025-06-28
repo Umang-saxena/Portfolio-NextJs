@@ -14,7 +14,7 @@ export default function Home() {
   const fetchAboutData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3000/api/about', {
+      const response = await axios.get('/api/about', {
         headers: {
           'Content-Type': 'application/json',
         },
