@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const SkillSchema = new mongoose.Schema({
+const SkillsSchema = new mongoose.Schema({
     name: String,
     createdAt: {
         type: Date,
@@ -8,4 +8,4 @@ const SkillSchema = new mongoose.Schema({
     },
 },{timestamps: true})
 
-export const Skill = mongoose.models.Skill || mongoose.model('Skill', SkillSchema);
+export const Skills = mongoose.models.Skills || mongoose.model('Skills', SkillsSchema);

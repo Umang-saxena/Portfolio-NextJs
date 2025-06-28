@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 const AboutSchema = new mongoose.Schema({
     name: String,
     email: String,
-    github: String,
-    
-    linkedin: String,
+    githublink: String,
+    linkedinlink: String,
+    leetcodelink: String,
+    resumedrivelink: String,
     phone: String,
     address: String,
     image: String,
