@@ -3,12 +3,11 @@ import React from "react";
 import Link from "next/link";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
-const Navbar = () => {
+const Navbar = ({ aboutData }) => {
     const navLinks = [
         { name: "Home", path: "/" },
         { name: "About Me", path: "/about" },
         { name: "Projects", path: "/projects" },
-        { name: "Github", path: "https://github.com/Umang-saxena" },
     ];
 
     const [isScrolled, setIsScrolled] = React.useState(false);
@@ -38,14 +37,14 @@ const Navbar = () => {
                                 : "text-gray-800 text-2xl font-bold"
                         }`}
                     >
-                        Umang Saxena
+                        {aboutData?.name || "Umang Saxena"}
                     </p>
                 </Link>
 
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-4 lg:gap-8">
                     {navLinks.map((link, i) => (
-                        <Link
+                        <a
                             key={i}
                             href={link.path}
                             className={`group flex flex-col gap-0.5 ${
@@ -58,10 +57,26 @@ const Navbar = () => {
                                     isScrolled ? "bg-white" : "bg-gray-800"
                                 } h-0.5 w-0 group-hover:w-full transition-all duration-300`}
                             />
-                        </Link>
+                        </a>
                     ))}
+                    {/* GitHub Link - External */}
                     <a
-                        href="https://drive.google.com/file/d/1AeRpV56DE8wVjiEy2_TdMPn76Dt3r1DK/view?usp=sharing"
+                        href={aboutData?.githublink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`group flex flex-col gap-0.5 ${
+                            isScrolled ? "text-white" : "text-gray-800"
+                        }`}
+                    >
+                        Github
+                        <div
+                            className={`${
+                                isScrolled ? "bg-white" : "bg-gray-800"
+                            } h-0.5 w-0 group-hover:w-full transition-all duration-300`}
+                        />
+                    </a>
+                    <a
+                        href={aboutData?.resumedrivelink }
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`border flex items-center gap-2 ${
@@ -77,7 +92,7 @@ const Navbar = () => {
                 {/* Desktop Right */}
                 <div className="hidden md:flex items-center gap-4">
                     <a
-                        href="https://www.linkedin.com/in/umang-saxena-9b5632331/"
+                        href={aboutData?.linkedinlink || "https://www.linkedin.com/in/umang-saxena-9b5632331/"}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`${
@@ -86,7 +101,7 @@ const Navbar = () => {
                                 : "bg-gray-800 text-white hover:bg-gray-700"
                         } px-8 py-2.5 rounded-full transition-all duration-500 flex items-center gap-2`}
                     >
-                        Let’s Connect <FaArrowAltCircleRight className="text-xl" />
+                        Let&apos;s Connect <FaArrowAltCircleRight className="text-xl" />
                     </a>
                 </div>
 
@@ -138,7 +153,7 @@ const Navbar = () => {
 
                 {/* Mobile Links */}
                 {navLinks.map((link, i) => (
-                    <Link
+                    <a
                         key={i}
                         href={link.path}
                         onClick={() => setIsMenuOpen(false)}
@@ -147,11 +162,24 @@ const Navbar = () => {
                         } hover:opacity-80 transition-colors text-lg`}
                     >
                         {link.name}
-                    </Link>
+                    </a>
                 ))}
 
-                <Link
-                    href="https://drive.google.com/file/d/1AeRpV56DE8wVjiEy2_TdMPn76Dt3r1DK/view?usp=sharing"
+                {/* Mobile GitHub Link */}
+                <a
+                    href={aboutData?.githublink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`${
+                        isScrolled ? "text-white" : "text-gray-800"
+                    } hover:opacity-80 transition-colors text-lg`}
+                >
+                    Github
+                </a>
+
+                <a
+                    href={aboutData?.resumedrivelink }
                     className={`border flex items-center gap-2 ${
                         isScrolled
                             ? "border-white text-white hover:bg-white hover:text-blue-600"
@@ -159,10 +187,10 @@ const Navbar = () => {
                     } px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all`}
                 >
                     Resume <FaArrowAltCircleRight className="text-xl" />
-                </Link>
+                </a>
 
                 <a
-                    href="https://www.linkedin.com/in/umang-saxena-9b5632331/"
+                    href={aboutData?.linkedinlink || "https://www.linkedin.com/in/umang-saxena-9b5632331/"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${
@@ -171,7 +199,7 @@ const Navbar = () => {
                             : "bg-gray-800 text-white hover:bg-gray-700"
                     } px-8 py-2.5 rounded-full transition-all duration-500 flex items-center gap-2`}
                 >
-                    Let’s Connect <FaArrowAltCircleRight className="text-xl" />
+                    Let&apos;s Connect <FaArrowAltCircleRight className="text-xl" />
                 </a>
             </div>
         </nav>
