@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+gimport Image from 'next/image';
 const Profile = () => {
 
 
@@ -38,7 +39,7 @@ const Profile = () => {
             <div className="bg-white/50 backdrop-blur-sm rounded-xl p-8 mb-8 shadow-lg">
                 <div className="flex flex-col md:flex-row gap-8 items-center">
                     <div className="w-48 h-48 rounded-full overflow-hidden">
-                        <img
+                        <Image
                             src="/images/profile.jpg"
                             alt="Profile"
                             className="w-full h-full object-cover"
