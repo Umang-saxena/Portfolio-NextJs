@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-gimport Image from 'next/image';
+import Image from 'next/image';
 const Profile = () => {
 
 
