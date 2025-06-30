@@ -16,7 +16,6 @@ const Profile = () => {
                     "/api/about"
                 );
                 setAboutData(response.data);
-                console.log("About Data:", response.data.about?.name);
             } catch (err) {
                 setError("Failed to fetch about data");
             } finally {
