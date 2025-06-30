@@ -28,7 +28,7 @@ const Hero = ({ aboutData }) => {
                             Full Stack Developer
                         </h1>
                         <p className="mt-4 md:mt-6 text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl">
-                            {aboutData.description || "I craft modern web experiences with cutting-edge technologies. Turning complex problems into elegant solutions."}
+                            {aboutData.tagline || "I craft modern web experiences with cutting-edge technologies. Turning complex problems into elegant solutions."}
                         </p>
                         <div className="mt-8 md:mt-10 flex flex-wrap gap-4 justify-center md:justify-start">
                             <Link href="/projects" passHref>

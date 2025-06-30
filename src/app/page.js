@@ -20,9 +20,10 @@ export default function Home() {
         },
         timeout: 10000,
       });
+      console.log(response.data.about); // Get first record
 
-      if (response.data.success && response.data.about.length > 0) {
-        setAboutData(response.data.about[0]); // Get first record
+      if (response.data.success ) {
+        setAboutData(response.data.about); // Get first record
         setError(null);
       } else {
         throw new Error('No about data found');
