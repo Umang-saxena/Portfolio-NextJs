@@ -7,9 +7,9 @@ export async function GET(request) {
         await dbConnect();
 
             // Get all records
-            const aboutData = await About.find().sort({ createdAt: -1 }).lean();
+            const aboutData = await About.findOne().lean();
             return new Response(
-                JSON.stringify({ success: true, count: aboutData.length, about: aboutData }),
+                JSON.stringify({ success: true, about: aboutData }),
                 { status: 200 }
             )}
         catch (err) {
