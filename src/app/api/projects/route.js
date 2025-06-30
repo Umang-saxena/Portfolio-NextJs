@@ -120,37 +120,12 @@ export async function GET(request) {
     try {
         await dbConnect();
 
-        /* optional pagination & sorting via query params ------------------- */
-        const { searchParams } = new URL(request.url);
-        const limit = parseInt(searchParams.get('limit')) || 50;
-        const page = parseInt(searchParams.get('page')) || 1;
-        const sortBy = searchParams.get('sortBy') || 'createdAt';
-        const sortOrder = searchParams.get('sortOrder') === 'asc' ? 1 : -1;
-
-        const allowedSortFields = ['title', 'createdAt', 'updatedAt'];
-        if (!allowedSortFields.includes(sortBy)) {
-            return new Response(JSON.stringify({ success: false, error: 'Invalid sort field' }), {
-                status: 400,
-            });
-        }
-
-        const skip = (page - 1) * limit;
-        const [projects, total] = await Promise.all([
-            Project.find().sort({ [sortBy]: sortOrder }).skip(skip).limit(limit).lean(),
-            Project.countDocuments(),
-        ]);
+        const projects = await Project.find().sort({ createdAt: -1 }).lean();
 
         return new Response(
             JSON.stringify({
                 success: true,
                 projects,
-                pagination: {
-                    currentPage: page,
-                    totalPages: Math.ceil(total / limit),
-                    totalProjects: total,
-                    hasNextPage: page * limit < total,
-                    hasPrevPage: page > 1,
-                },
             }),
             { status: 200 }
         );

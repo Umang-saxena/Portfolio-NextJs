@@ -1,54 +1,77 @@
 "use client"
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from '../../components/Navbar';
 import ProjectCard from '@/components/ProjectCard';
 import { motion } from 'framer-motion';
 import Footer from '@/components/Footer';
 
-const projects = [
-    {
-        title: 'Job Sphere (Presently Working) ',
-        description: 'Built a scalable job-hunting platform using MERN stack with robust frontend, backend, and database-level validations. ',
-        tech: ['ReactJs', 'Node.js', 'MongoDB', 'Express.js','Redux Toolkit'],
-        image: '/images/projects/job-sphere.jpg',
-        link: '/',
-        github: '/'
-    },
-    {
-        title: 'TrackIt',
-        description: 'Developed an expense tracking app with real-time authentication and budget management features.',
-        tech: ['Next.js', 'Firebase', 'Tailwind CSS','Mongodb','Shadcn','Recharts'],    
-        image: '/images/projects/trackit.jpg',
-        link: 'https://expense-tracker-sigma-jet.vercel.app/',
-        github: 'https://github.com/Umang-saxena/expense-tracker'
-    },
-    {
-        title: 'Brain Tumour Detection',
-        description: ' Designed and trained a deep learning model using a 4-layer ResNet architecture to detect brain tumors from MRI scans. ',
-        tech: ['Python', 'ResNet', 'Streamlit', 'Machine Learning'],
-        image: '/images/projects/brain-tumour.jpg',
-        link: 'https://github.com/Umang-saxena/Brain-tumour-detection',
-        github: 'https://github.com/Umang-saxena/Brain-tumour-detection'
-    },
-    {
-        title: 'React Portfolio Template',
-        description: ' Designed a portfolio template as a side project with the aim of good animations and clean UI.',
-        tech: ['React', 'ResNet', 'Streamlit', 'Machine Learning'],
-        image: '/images/projects/portfolio.jpg',
-        link: 'https://umang-portfolio-blush.vercel.app/',
-        github: 'https://github.com/Umang-saxena/Portfolio'
-    },
-    {
-        title: 'Eventify  | Events Management System (May not work due to AWS cluster credential issues)',
-        description: ' Designed a portfolio template as a side project with the aim of good animations and clean UI.',
-        tech: ['Python', 'DBMS', 'MySQL', 'Streamlit',"AWS RDS"],
-        image: '/images/projects/eventify.png',
-        link: 'https://umang-portfolio-blush.vercel.app/',
-        github: 'https://github.com/Umang-saxena/Event_management1'
-    }
-];
-
 const Projects = () => {
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                setLoading(true);
+                const response = await axios.get('/api/projects'); // Adjust the endpoint as needed
+                
+                if (response.data.success) {
+                    // Transform API data to match ProjectCard component props
+                    const transformedProjects = response.data.projects.map(project => ({
+                        title: project.title,
+                        description: project.description,
+                        tech: project.technologies,
+                        demolink: project.demolink,
+                        githublink: project.githublink,
+                        id: project._id
+                    }));
+                    setProjects(transformedProjects);
+                } else {
+                    setError('Failed to fetch projects');
+                }
+            } catch (err) {
+                console.error('Error fetching projects:', err);
+                setError('Failed to load projects. Please try again later.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, []);
+
+    const LoadingSpinner = () => (
+        <div className="flex justify-center items-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
+        </div>
+    );
+
+    const ErrorMessage = () => (
+        <div className="text-center py-20">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+                <h3 className="text-red-800 font-semibold mb-2">Error Loading Projects</h3>
+                <p className="text-red-600">{error}</p>
+                <button 
+                    onClick={() => window.location.reload()} 
+                    className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+                >
+                    Try Again
+                </button>
+            </div>
+        </div>
+    );
+
+    const EmptyState = () => (
+        <div className="text-center py-20">
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 max-w-md mx-auto">
+                <h3 className="text-gray-800 font-semibold mb-2">No Projects Found</h3>
+                <p className="text-gray-600">No projects have been added yet.</p>
+            </div>
+        </div>
+    );
+
     return (
         <main className="min-h-screen bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF]">
             <div className="fixed top-0 left-0 right-0 z-50">
@@ -73,23 +96,32 @@ const Projects = () => {
                         </p>
                     </div>
 
-                    {/* Projects Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ 
-                                    duration: 0.5,
-                                    delay: index * 0.2,
-                                    ease: "easeOut"
-                                }}
-                            >
-                                <ProjectCard {...project} />
-                            </motion.div>
-                        ))}
-                    </div>
+                    {/* Content */}
+                    {loading ? (
+                        <LoadingSpinner />
+                    ) : error ? (
+                        <ErrorMessage />
+                    ) : projects.length === 0 ? (
+                        <EmptyState />
+                    ) : (
+                        /* Projects Grid */
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {projects.map((project, index) => (
+                                <motion.div
+                                    key={project.id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ 
+                                        duration: 0.5,
+                                        delay: index * 0.2,
+                                        ease: "easeOut"
+                                    }}
+                                >
+                                    <ProjectCard {...project} />
+                                </motion.div>
+                            ))}
+                        </div>
+                    )}
                 </motion.div>
             </section>
             <Footer />
@@ -97,4 +129,4 @@ const Projects = () => {
     );
 };
 
-export default Projects; 
+export default Projects;

@@ -3,20 +3,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
-const ProjectCard = ({ title, description, tech, image, link, github }) => {
+//  title: '',
+//                         description: '',
+//                         githublink: '',
+//                         demolink: '',
+//                         technologies: ''
+
+const ProjectCard = ({ title, description, tech, demolink, githublink }) => {
     return (
         <div className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            {/* Image Container */}
-            <div className="relative h-48 w-full overflow-hidden">
-                <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            </div>
-
             {/* Content */}
             <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
@@ -36,9 +31,9 @@ const ProjectCard = ({ title, description, tech, image, link, github }) => {
 
                 {/* Links */}
                 <div className="flex items-center gap-4">
-                    {github && (
+                    {githublink && (
                         <Link
-                            href={github}
+                            href={githublink}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
@@ -47,9 +42,9 @@ const ProjectCard = ({ title, description, tech, image, link, github }) => {
                             <span>Source</span>
                         </Link>
                     )}
-                    {link && (
+                    {demolink && (
                         <Link
-                            href={link}
+                            href={demolink}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"

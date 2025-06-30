@@ -21,12 +21,19 @@ const validationSchema = Yup.object({
         .min(10, 'Description must be at least 10 characters')
         .max(500, 'Description must be less than 500 characters')
         .required('Description is required'),
-    imageUrl: Yup.string()
+    githublink: Yup.string()
         .url('Must be a valid URL')
-        .required('Image URL is required'),
-    link: Yup.string()
+        .required('GitHub link is required'),
+    demolink: Yup.string()
         .url('Must be a valid URL')
-        .required('Project link is required'),
+        .required('Demo link is required'),
+    technologies: Yup.string()
+        .required('Technologies are required')
+        .test('min-technologies', 'Please enter at least one technology', function(value) {
+            if (!value) return false;
+            const techs = value.split(',').map(tech => tech.trim()).filter(tech => tech.length > 0);
+            return techs.length > 0;
+        })
 });
 
 const PortfolioForm = () => {
@@ -42,13 +49,23 @@ const PortfolioForm = () => {
                     initialValues={{
                         title: '',
                         description: '',
-                        imageUrl: '',
-                        link: '',
+                        githublink: '',
+                        demolink: '',
+                        technologies: ''
                     }}
                     validationSchema={validationSchema}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
                         try {
-                            const response = await api.post('/api/portfolio', values);
+                            // Convert technologies string to array
+                            const formattedValues = {
+                                ...values,
+                                technologies: values.technologies
+                                    .split(',')
+                                    .map(tech => tech.trim())
+                                    .filter(tech => tech.length > 0)
+                            };
+
+                            const response = await api.post('/api/projects', formattedValues);
 
                             if (response.status === 200 || response.status === 201) {
                                 setSubmitStatus({ type: 'success', message: 'Project added successfully!' });
@@ -98,35 +115,53 @@ const PortfolioForm = () => {
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="imageUrl">Image URL</Label>
+                                <Label htmlFor="githublink">GitHub Link</Label>
                                 <Field
                                     as={Input}
-                                    id="imageUrl"
-                                    name="imageUrl"
-                                    placeholder="Enter image URL"
+                                    id="githublink"
+                                    name="githublink"
+                                    placeholder="Enter GitHub repository URL"
                                     type="url"
                                 />
                                 <ErrorMessage
-                                    name="imageUrl"
+                                    name="githublink"
                                     component="div"
                                     className="text-sm text-destructive"
                                 />
                             </div>
 
                             <div className="space-y-2">
-                                <Label htmlFor="link">Project Link</Label>
+                                <Label htmlFor="demolink">Demo Link</Label>
                                 <Field
                                     as={Input}
-                                    id="link"
-                                    name="link"
-                                    placeholder="Enter project link"
+                                    id="demolink"
+                                    name="demolink"
+                                    placeholder="Enter live demo URL"
                                     type="url"
                                 />
                                 <ErrorMessage
-                                    name="link"
+                                    name="demolink"
                                     component="div"
                                     className="text-sm text-destructive"
                                 />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label htmlFor="technologies">Technologies</Label>
+                                <Field
+                                    as={Input}
+                                    id="technologies"
+                                    name="technologies"
+                                    placeholder="Enter technologies (comma-separated, e.g., React, Node.js, MongoDB)"
+                                />
+                                <ErrorMessage
+                                    name="technologies"
+                                    component="div"
+                                    className="text-sm text-destructive"
+                                />
+                                <p className="text-sm text-muted-foreground">
+                                    Enter technologies separated by commas
+                                </p>
                             </div>
 
                             {submitStatus && (

@@ -23,7 +23,7 @@ export default function Home() {
       console.log(response.data.about); // Get first record
 
       if (response.data.success ) {
-        setAboutData(response.data.about); // Get first record
+        setAboutData(response.data.about); 
         setError(null);
       } else {
         throw new Error('No about data found');
