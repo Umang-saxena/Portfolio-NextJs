@@ -11,6 +11,7 @@ const AboutSchema = new mongoose.Schema({
     address: String,
     image: String,
     description: String,
+    tagline: String,
     createdAt: {
         type: Date,
         default: Date.now

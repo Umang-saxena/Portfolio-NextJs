@@ -37,7 +37,8 @@ export async function POST(request) {
             phone,
             address,
             image,
-            description
+            description,
+            tagline
         } = body;
 
         // Basic validation
@@ -58,7 +59,8 @@ export async function POST(request) {
             phone,
             address,
             image,
-            description
+            description,
+            tagline
         });
 
         return new Response(
