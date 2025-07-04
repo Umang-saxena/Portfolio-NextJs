@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FaCalendarAlt, FaExternalLinkAlt } from 'react-icons/fa';
 

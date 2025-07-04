@@ -2,11 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../../components/Navbar';
-import ProjectCard from '@/components/ProjectCard';
 import BlogCard from '@/components/BlogCard';
 import { motion } from 'framer-motion';
 import Footer from '@/components/Footer';
-import { Carter_One } from 'next/font/google';
 
 const Projects = () => {
     const [blogs, setBlogs] = useState([]);
@@ -93,8 +91,7 @@ const Projects = () => {
                     <div className="text-center mb-16">
                         <h2 className="text-5xl font-bold text-blue-500 mb-4">My Blogs</h2>
                         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Here are some of the projects I&apos;ve worked on. Each project is unique and
-                            showcases different aspects of my skills and experience.
+                           Each blog captures a piece of my learning journey — from challenges I’ve faced to the solutions I’ve discovered.
                         </p>
                     </div>
 
