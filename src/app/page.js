@@ -5,6 +5,8 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import Skills from '../components/Skills';
+import { Analytics } from '@vercel/analytics/next';
+
 
 export default function Home() {
   const [aboutdata, setAboutData] = useState(null);
