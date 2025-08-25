@@ -41,6 +41,8 @@ const Profile = () => {
                     <div className="w-48 h-48 rounded-full overflow-hidden">
                         <Image
                             src="/images/profile.jpg"
+                            width={220}
+                            height={220}
                             alt="Profile"
                             className="w-full h-full object-cover"
                         />
