@@ -7,7 +7,7 @@ export async function GET(request) {
                 item: ['content:encodedSnippet']
         }
     });
-        const feed = await parser.parseURL("https://medium.com/feed/@hanusaxena68"); // Replace with your Medium RSS feed URL
+        const feed = await parser.parseURL("https://medium.com/feed/@umangsaxena779"); // Replace with your Medium RSS feed URL
 
         const articles = feed.items.map(item => ({
             title: item.title,
