@@ -1,59 +1,36 @@
-import dbConnect from '@/utils/mongoose';
-import { Experience } from '@/utils/models/Experience';
+import { NextResponse } from 'next/server';
+import { portfolioData } from '@/lib/portfolioData';
 
 // GET: Fetch all experiences
 export async function GET(request) {
-    try {
-        await dbConnect();
-
-        const experiences = await Experience.find().sort({ startDate: -1 }).lean();
-
-        return new Response(
-            JSON.stringify({ success: true, experiences }),
-            { status: 200 }
-        );
-    } catch (err) {
-        console.error('Error fetching experiences:', err);
-        return new Response(
-            JSON.stringify({ success: false, error: 'Failed to fetch experiences' }),
-            { status: 500 }
-        );
-    }
+    return NextResponse.json({ success: true, experiences: portfolioData.experience });
 }
 
 // POST: Add a new experience
 export async function POST(request) {
-    try {
-        await dbConnect();
+    const body = await request.json();
+    const { company, role, startDate, endDate, description } = body;
 
-        const body = await request.json();
-        const { company, role, startDate, endDate, description } = body;
-
-        // Basic validation
-        if (!company || !role || !startDate) {
-            return new Response(
-                JSON.stringify({ success: false, error: 'Company, role, and startDate are required.' }),
-                { status: 400 }
-            );
-        }
-
-        const newExperience = await Experience.create({
-            company,
-            role,
-            startDate,
-            endDate,
-            description
-        });
-
-        return new Response(
-            JSON.stringify({ success: true, message: 'Experience added successfully', experience: newExperience }),
-            { status: 201 }
-        );
-    } catch (err) {
-        console.error('Error adding experience:', err);
-        return new Response(
-            JSON.stringify({ success: false, error: 'Failed to add experience' }),
-            { status: 500 }
+    if (!company || !role || !startDate) {
+        return NextResponse.json(
+            { success: false, error: 'Company, role, and startDate are required.' },
+            { status: 400 }
         );
     }
+
+    return NextResponse.json(
+        {
+            success: true,
+            message: 'Experience is now managed manually in the UI.',
+            experience: {
+                id: `manual-${Date.now()}`,
+                company,
+                role,
+                startDate,
+                endDate,
+                description,
+            },
+        },
+        { status: 201 }
+    );
 }

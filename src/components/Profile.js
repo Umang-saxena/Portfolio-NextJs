@@ -1,30 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import Image from 'next/image';
-const Profile = () => {
-
-
-    const [aboutData, setAboutData] = useState();
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        setLoading(true);
-        setError(null);
-        const fetchAboutData = async () => {
-            try {
-                const response = await axios.get(
-                    "/api/about"
-                );
-                setAboutData(response.data);
-            } catch (err) {
-                setError("Failed to fetch about data");
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchAboutData();
-    }, []);
+const Profile = ({ aboutData }) => {
 
     return (
         <>
@@ -49,10 +25,10 @@ const Profile = () => {
                     </div>
                     <div className="flex-1">
                         <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                            {aboutData?.about?.name}
+                            {aboutData?.name}
                         </h2>
                         <p className="text-lg text-gray-600 mb-4">
-                            {aboutData?.about?.description}
+                            {aboutData?.description}
 
                         </p>
                         <div className="flex gap-4">
@@ -71,7 +47,7 @@ const Profile = () => {
                                 </svg>
                             </a>
                             <a
-                                href={aboutData?.about?.leetcodelink}
+                                href={aboutData?.leetcodelink}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-gray-600 hover:text-blue-500 transition-colors"

@@ -6,8 +6,10 @@ import { motion } from "framer-motion";
 import Profile from "../../components/Profile";
 import Experience from "../../components/Experience";
 import SkillsInAbout from "@/components/SkillsInAbout";
+import { portfolioData } from "@/lib/portfolioData";
 
 const About = () => {
+  const { about, experience, skills } = portfolioData;
   
   return (
     <main className="min-h-screen bg-gradient-to-r from-[#F5F2FF] to-[#FBF6FF] relative">
@@ -25,9 +27,9 @@ const About = () => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto"
         >
-          <Profile />
-          <Experience />
-          <SkillsInAbout />
+          <Profile aboutData={about} />
+          <Experience experienceData={experience} />
+          <SkillsInAbout skillsData={skills} />
         </motion.div>
       </div>
       <Footer />

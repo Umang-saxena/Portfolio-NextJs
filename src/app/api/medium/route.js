@@ -7,21 +7,16 @@ export async function GET(request) {
                 item: ['content:encodedSnippet']
         }
     });
-        const feed = await parser.parseURL("https://medium.com/feed/@umangsaxena779"); // Replace with your Medium RSS feed URL
+        const feed = await parser.parseURL("https://medium.com/feed/@umangsaxena779");
 
         const articles = feed.items.map(item => ({
             title: item.title,
             link: item.link,
             pubDate: item.pubDate,
-            // contentSnippet: item.content.encodedSnippet,
-            content: item["content:encodedSnippet"], // Use contentSnippet for a brief description
-            category: item.categories,  //Array of strings
+            content: item["content:encodedSnippet"],
+            category: item.categories,
         }));
 
-        // return new Response(
-        //     JSON.stringify({ success: true, feed }),
-        //     { status: 200 }
-        // );
         return new Response(
             JSON.stringify({ success: true, articles }),
             { status: 200 }

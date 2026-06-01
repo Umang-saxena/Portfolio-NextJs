@@ -15,18 +15,16 @@ const Projects = () => {
         const fetchProjects = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('/api/medium'); // Adjust the endpoint as needed
-                
+                const response = await axios.get('/api/medium');
+
                 if (response.data.success) {
-                    // Transform API data to match ProjectCard component props
-                    const fetchedBlogs= response.data.articles.map(item => ({
+                    const fetchedBlogs = response.data.articles.map(item => ({
                         title: item.title,
                         link: item.link,
                         pubDate: item.pubDate,
                         content: item.content,
-                        category: item.category, // Assuming category is an array of strings
-                }));
-                    // Set the transformed projects to state
+                        category: item.category,
+                    }));
                     setBlogs(fetchedBlogs);
                 } else {
                     setError('Failed to fetch blogs');
@@ -95,7 +93,6 @@ const Projects = () => {
                         </p>
                     </div>
 
-                    {/* Content */}
                     {loading ? (
                         <LoadingSpinner />
                     ) : error ? (
@@ -103,7 +100,6 @@ const Projects = () => {
                     ) : blogs.length === 0 ? (
                         <EmptyState />
                     ) : (
-                        /* Projects Grid */
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {blogs.map((blogg, index) => (
                                 <motion.div
@@ -116,7 +112,6 @@ const Projects = () => {
                                         ease: "easeOut"
                                     }}
                                 >
-                                    {/* <ProjectCard {...blogg} /> */}
                                     <BlogCard {...blogg} />
                                 </motion.div>
                             ))}
